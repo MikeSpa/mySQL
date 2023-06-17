@@ -92,8 +92,42 @@ print("All records from Orders table are retrieved.")
 # Create a cursor object with dictionary=True
 dic_cursor=connection.cursor(dictionary=True)
 type(cursor)
+
+# Let's close the cursor and the connection
+if connection.is_connected():
+    cursor.close()
+    print("The cursor is closed.")
+    connection.close()
+    print("MySQL connection is closed.")
+else:
+    print("Connection is already closed")
 ```
 
+## INSERT
+
+```py
+insert_orders="""
+INSERT INTO Orders (OrderID, TableNo, MenuID, BookingID, Quantity, BillAmount)
+VALUES
+(1, 12, 1, 1, 2, 86),
+(2, 19, 2, 2, 1, 37),
+(3, 15, 2, 3, 1, 37),
+(4, 5, 3, 4, 1, 40),
+(5, 8, 1, 5, 1, 43);"""
+
+print("Inserting data in MenuItems table.")
+# Populate MenuItems table
+cursor.execute(insert_menuitmes)
+print("Total number of rows in MenuItem table: ", cursor.rowcount)
+# Once the query is executed, you commit the change into the database 
+connection.commit()
+```
+
+## READ
+
+```py
+
+```
 
 
 ## Close connection
