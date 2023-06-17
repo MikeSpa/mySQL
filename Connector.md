@@ -61,6 +61,40 @@ for table in cursor:
     print(table)
 ```
 
+## Working with cursors
+
+
+```py
+# Create a cursor object to communicate with entire MySQL database
+cursor = connection.cursor()
+cursor.execute("""USE little_lemon""")
+cursor.execute("""SHOW TABLES;""")
+results = cursor.fetchall()
+for table in results:
+    print(table)
+
+# Need Buffered cursor if multiple SELECT:
+cursor = connection.cursor(buffered = True)
+
+# Set the “little_lemon” database for use
+cursor.execute("""USE little_lemon;""")
+print("The little_lemon database is set for use.")
+
+# Retrieve records from bookings
+cursor.execute("""SELECT * FROM Bookings;""")
+print("All records from Bookings table are retrieved.")
+
+# Retrieve records from orders
+cursor.execute("""SELECT * FROM Orders;""")
+print("All records from Orders table are retrieved.")
+
+# Dictionary cursor
+# Create a cursor object with dictionary=True
+dic_cursor=connection.cursor(dictionary=True)
+type(cursor)
+```
+
+
 
 ## Close connection
 
