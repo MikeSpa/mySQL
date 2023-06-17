@@ -126,9 +126,59 @@ connection.commit()
 ## READ
 
 ```py
+# Read query is:
+all_bookings = """SELECT GuestFirstName, GuestLastName, 
+TableNo FROM Bookings;"""
 
+# Eexecute query 
+cursor.execute(all_bookings)
+
+# Fetch all results that satisfy the query 
+results = cursor.fetchall()
+
+# Retrieve column names
+cols = cursor.column_names
+
+# Print column names and records from results using for loop
+print("""Data in the "Bookings" table:""")
+print(cols)
+for result in results:
+    print(result)
 ```
 
+## Update
+
+```py
+# The update query is:
+update_bookings="""UPDATE Bookings
+SET TableNo=10
+WHERE BookingID = 6;"""
+
+# Execute the query to update the table
+print("Executing update query")
+cursor.execute(update_bookings)
+
+# Commit change 
+print("Comitting change to the table")
+connection.commit()
+print("Record is updated in the table")
+```
+
+## Delete
+
+```py
+# The SQL query is:
+delete_query_greek="""DELETE FROM Menus WHERE Cuisine = 'Greek'"""
+
+# Execute the query
+print("Executing 'DELETE' query")
+cursor.execute(delete_query_greek)
+
+# Commit change 
+print("Comitting change to the table")
+connection.commit()
+print("The table is updated after deletion of the requested records")
+```
 
 ## Close connection
 
