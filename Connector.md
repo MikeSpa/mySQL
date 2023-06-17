@@ -180,8 +180,8 @@ connection.commit()
 print("The table is updated after deletion of the requested records")
 ```
 
-## Filtering and sorting
-Similar to above
+## Filtering, Sorting and JOIN
+Similar to above, its still just read statement
 
 
 ## Close connection
