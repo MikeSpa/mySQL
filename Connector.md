@@ -180,7 +180,7 @@ connection.commit()
 print("The table is updated after deletion of the requested records")
 ```
 
-## Filtering, Sorting and JOIN
+## Filtering, Sorting, JOIN, MySQL function
 Similar to above, its still just read statement
 
 
