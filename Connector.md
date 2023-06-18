@@ -236,6 +236,37 @@ Drop a procedure:
 ```py
 cursor.execute("DROP PROCEDURE IF EXISTS TopSpender;")
 ```
+## Connection Pool
+
+```py
+from mysql.connector.pooling import MySQLConnectionPool
+from mysql.connector import Error
+
+
+%reload_ext dotenv
+%dotenv
+import os
+# load the database password from an .env file
+db_pass = os.getenv("DB_PASS")
+
+dbconfig = {
+    "database":"little_lemon",
+    "user" : "root",
+    "password" : db_pass
+}
+
+try:
+    pool = MySQLConnectionPool(pool_name = "ll_pool_a",
+                           pool_size = 3, #default is 5
+                           **dbconfig)
+    print("The connection pool is created with a name: ",pool.pool_name)
+    print("The pool size is:",pool.pool_size)
+
+except Error as er:
+    print("Error code:", er.errno)
+    print("Error message:", er.msg)
+```
+
 
 ## Close connection
 
