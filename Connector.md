@@ -183,6 +183,59 @@ print("The table is updated after deletion of the requested records")
 ## Filtering, Sorting, JOIN, MySQL function
 Similar to above, its still just read statement
 
+## Procedure
+
+```py
+# Stored procedure name >> TopSpender
+# Our stored procedure query is
+stored_procedure_query="""
+CREATE PROCEDURE TopSpender()
+
+BEGIN
+
+SELECT Bookings.BookingID, 
+CONCAT(
+Bookings.GuestFirstname,
+' ',
+Bookings.GuestLastname
+) AS CustomerName,
+Orders.BillAmount 
+FROM Bookings
+INNER JOIN
+Orders ON Bookings.BookingID=Orders.BookingID
+ORDER BY BillAmount DESC LIMIT 1;
+
+END
+
+"""
+
+# Execute the query
+cursor.execute(stored_procedure_query)
+
+#********************************************#
+
+# Call the stored procedure with its name
+cursor.callproc("TopSpender")
+
+# Retrieve recrods in "dataset"
+results = next( cursor.stored_results() )
+dataset = results.fetchall()
+
+# Retrieve column names using list comprehension in a 'for' loop 
+for column_id in cursor.stored_results():
+    columns = [ column[0] for column in column_id.description ]
+
+# Print column names
+print(columns)
+
+# Print data 
+for data in dataset:
+    print(data)
+```
+Drop a procedure:
+```py
+cursor.execute("DROP PROCEDURE IF EXISTS TopSpender;")
+```
 
 ## Close connection
 
